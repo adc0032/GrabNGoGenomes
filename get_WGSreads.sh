@@ -12,9 +12,10 @@ elif [[ $# -lt 1 ]]; then
         exit 0
 else
     touch $1.SRA_info.txt
+    echo  "Run Size LibraryType Sample# SciName" >> $1.SRA_info.txt
     esearch -db sra -query "$1 [ORGN]"|
     efetch -format runinfo -mode xml|
     xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run bases LibraryStrategy Sample|
-    awk -F "\t" '$3=="WGS"{print $0}' > $1.SRA_info.txt
+    awk -F "\t" '$3=="WGS"{print $0}' >> $1.SRA_info.txt
 fi
 
