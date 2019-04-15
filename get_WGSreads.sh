@@ -3,7 +3,7 @@
 if [[ $1 == "-h" ]]; then
 
     echo "Enter search query organism for lists of sequence run accession information."
-    echo "Script file with a tab delimited table including SRA, /# of bases, Library Type, Sample"
+    echo "Script file with a tab delimited table including SRA, /# of bases, Library Type, Sample, and Scientific Name"
 
 
 elif [[ $# -lt 1 ]]; then
@@ -12,7 +12,7 @@ elif [[ $# -lt 1 ]]; then
         exit 0
 else
     touch $1.SRA_info.txt
-    echo  "Run  Size    LibraryType Sample# SciName" >> $1.SRA_info.txt
+    echo -e "Run\tSize\tLibraryType\tSample#\tSciName" >> $1.SRA_info.txt
     esearch -db sra -query "$1 [ORGN]"|
     efetch -format runinfo -mode xml |
     xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run bases LibraryStrategy Sample ScientificName |
