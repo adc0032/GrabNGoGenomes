@@ -28,7 +28,7 @@ else
 fi
 
 
-awk '{print $org}' $genus$species~SRA_info_$cdate.txt| tail -n +2 > $genus$species~run_accession.$cdate.txt
+awk '{print $1}' $genus$species~SRA_info_$cdate.txt| tail -n +2 > $genus$species~run_accession.$cdate.txt
 
 Entries=$(tail -n +2 $genus$species~SRA_info_$cdate.txt | wc -l)
 echo "$Entries entries found. Run IDs for sequence download is availabe as $genus$species~run_accession.$cdate.txt. See $genus$species~SRA_info_$cdate.txt for more information"

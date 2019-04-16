@@ -17,10 +17,11 @@ elif [[ $# -lt 1 ]]; then
 else
     
     org=$1
-    label=$(echo $org|awk '{print $1}')
+    genus=$(echo $org|awk '{print $1}')
+    species=$(echo $org|awk '{print $2}')
     cdate=$(date|awk '{OFS="_"}{print $2,$3}')
     
-    read -e -p "Enter run accession list filename (default is get_WGSreads.sh output file): " -i "$org.run_accession.$cdate.txt" runs
+    read -e -p "Enter run accession list filename (default is get_WGSreads.sh output file): " -i "$genus$species~run_accession.$cdate.txt" runs
     echo " "
     echo "File used: $runs"
     if [[ ! -s $runs ]]; then
@@ -31,14 +32,13 @@ else
         echo "Loaded SRA Toolkit version 2.8.1"
         echo " "
 
-        mkdir $label~files_$cdate
-        sd="./$label~files_$cdate/"
+        mkdir $genus$species~files_$cdate
+        sd="./$genus$species~files_$cdate/"
         
         echo "Created the following directory for sequencing reads: $sd"
         echo " "
         echo "====================================================="
     
-##### Stopped here... also attempting to not have to cd into directory-need output to redirect into correct folder.
         add=0
         for run in $(cat $runs ); do
             let add++
