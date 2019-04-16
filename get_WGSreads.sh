@@ -10,16 +10,19 @@ if [[ $1 == "-h" ]]; then
 
 elif [[ $# -lt 1 ]]; then
 
-        echo "Please provide Organism for a table of NCBI's sequence information. Try -h for help"
+        echo "Please provide organism for a table of NCBI's sequence information. Try -h for help"
         exit 0
 else
-    touch $1.SRA_info.txt
-    echo -e "Run\tSize\tLibraryType\tSample#\tSciName" >> $1.SRA_info.txt
+    cdate=$(date|awk '{OFS="_"}{print $2,$3}')
+    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $1.SRA_info_$cdate.txt
     esearch -db sra -query "$1 [ORGN]"|
     efetch -format runinfo -mode xml |
-    xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run bases LibraryStrategy Sample ScientificName |
-    awk -F "\t" '$3=="WGS"{print $0}' >> $1.SRA_info.txt
+    xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run size_MB LibraryStrategy Sample ScientificName Platform Model Consent |
+    awk -F "\t" '$3=="WGS"{print $0}' >> $1.SRA_info_$cdate.txt
 fi
 
-Entries=$(tail -n +2 $1.SRA_info.txt | wc -l)
-echo "$Entries entries found. See $1.SRA_info.txt for more information"
+
+awk '{print $1}' $1.SRA_info_$cdate.txt| tail -n +2 > $1.run_accession.$cdate.txt
+
+Entries=$(tail -n +2 $1.SRA_info_$cdate.txt | wc -l)
+echo "$Entries entries found. Run IDs for sequence download is availabe as $1.run_accession.$cdate.txt. See $1.SRA_info_$cdate.txt for more information"
