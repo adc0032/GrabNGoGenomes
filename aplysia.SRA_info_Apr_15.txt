@@ -1,0 +1,51 @@
+Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        Apr_15
+SRR8000363	394	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000364	909	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000365	372	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000366	554	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000367	499	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000368	357	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000369	606	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000370	413	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000371	565	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000372	582	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000373	536	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000374	787	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000375	164	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000376	553	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000377	666	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000378	164	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000379	299	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR8000380	459	WGS	SRS3899905	Aplysia californica	PACBIO_SMRT	Sequel	public
+SRR392446	1156	WGS	SRS283331	Aplysia californica	ILLUMINA	Illumina Genome Analyzer II	public
+SRR392447	2700	WGS	SRS283331	Aplysia californica	ILLUMINA	Illumina Genome Analyzer II	public
+SRR392448	2590	WGS	SRS283331	Aplysia californica	ILLUMINA	Illumina Genome Analyzer II	public
+SRR392449	3042	WGS	SRS283331	Aplysia californica	ILLUMINA	Illumina Genome Analyzer II	public
+SRR392450	3073	WGS	SRS283331	Aplysia californica	ILLUMINA	Illumina Genome Analyzer II	public
+SRR392451	710	WGS	SRS283331	Aplysia californica	ILLUMINA	Illumina Genome Analyzer II	public
+SRR392452	1971	WGS	SRS283331	Aplysia californica	ILLUMINA	Illumina Genome Analyzer II	public
+SRR392453	998	WGS	SRS283331	Aplysia californica	ILLUMINA	Illumina Genome Analyzer II	public
+SRR769352	16116	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR769353	16109	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR769354	12398	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR769355	15829	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR769356	13850	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR769357	11965	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR769358	15699	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR769359	14739	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252601	15392	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252602	16253	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252603	17997	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252604	12684	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252605	11312	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252606	17167	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252607	15116	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252608	17434	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252609	16675	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252610	16834	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252611	17429	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR252612	17360	WGS	SRS399103	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR402292	6044	WGS	SRS290244	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR402293	5954	WGS	SRS290244	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR402294	5990	WGS	SRS290244	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
+SRR402295	7325	WGS	SRS290244	Aplysia californica	ILLUMINA	Illumina HiSeq 2000	public
