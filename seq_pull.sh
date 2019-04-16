@@ -25,8 +25,16 @@ else
     echo " "
     echo "====================================================="
 
-    for run in $(cat run_list.txt)
-    do
-    fastq-dump -I $run
+    add=0
+    for run in $(cat ../$2 ); do
+        let add++
+        tot=$(cat ../$2|wc -l)
+        fastq-dump --split-files -I $run
+        gzip *.fastq
+        echo "$add of $tot sequences downloaded & zip compressed"
+        echo "----------------------------------------"
     done
-
+    echo " "
+    echo "====================================================="
+    echo "Downloader Complete! Sequences can be found in $1~files_$cdate"
+fi
