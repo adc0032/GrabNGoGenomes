@@ -13,28 +13,44 @@ elif [[ $# -lt 2 ]]; then
     exit 0
 
 else
-    ##Modules and Variables
-    module load sra/2.8.1
-    echo "Loaded SRA Toolkit version 2.8.1"
-    echo " "    
-    cdate= $(date | awk'{OFS="_"}{print $2,$3}')
+    if [[ ! -f $2 ]]; then
+        echo "Please enter run accession file name after organism name (position 2)"
+        exit 0
+    else
 
-    mkdir $1~files_$cdate
-    cd $1~files_$cdate
-    echo "Created the following directory for sequencing reads: $1~files_$cdate/"
-    echo " "
-    echo "====================================================="
+        if [[ ! -s $2 ]]; then
+            echo "File is empty. Please provide SRR list; try seq_pull.sh -h for more information"
+        else
+            ##Modules and Variables
+            module load sra/2.8.1
+            echo "Loaded SRA Toolkit version 2.8.1"
+            echo " "
+            cdate=$(date|awk '{OFS="_"}{print $2,$3}')
 
-    add=0
-    for run in $(cat ../$2 ); do
-        let add++
-        tot=$(cat ../$2|wc -l)
-        fastq-dump --split-files -I $run
-        gzip *.fastq
-        echo "$add of $tot sequences downloaded & zip compressed"
-        echo "----------------------------------------"
-    done
-    echo " "
-    echo "====================================================="
-    echo "Downloader Complete! Sequences can be found in $1~files_$cdate"
+            mkdir $1~files_$cdate
+            cd $1~files_$cdate
+
+            echo "Created the following directory for sequencing reads: $1~files_$cdate/"
+            echo " "
+            echo "====================================================="
+
+
+            add=0
+            for run in $(cat ../$2 ); do
+                let add++
+                tot=$(cat ../$2|wc -l)
+                fastq-dump --split-files -I $run
+                gzip *.fastq
+
+
+                echo "$add of $tot sequences downloaded & zip compressed"
+                echo "----------------------------------------"
+            done
+
+
+            echo " "
+            echo "====================================================="
+            echo "Downloader Complete! Sequences can be found in $1~files_$cdate"
+        fi
+    fi
 fi
