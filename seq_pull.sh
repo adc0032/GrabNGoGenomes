@@ -14,12 +14,16 @@ elif [[ $# -lt 2 ]]; then
 
 else
     ##Modules and Variables
-    module load sra/2.8.1    
+    module load sra/2.8.1
+    echo "Loaded SRA Toolkit version 2.8.1"
+    echo " "    
     cdate= $(date | awk'{OFS="_"}{print $2,$3}')
 
-    mkdir seq_files_$cdate
-
-    cd seq_files_$cdate
+    mkdir $1~files_$cdate
+    cd $1~files_$cdate
+    echo "Created the following directory for sequencing reads: $1~files_$cdate/"
+    echo " "
+    echo "====================================================="
 
     for run in $(cat run_list.txt)
     do
