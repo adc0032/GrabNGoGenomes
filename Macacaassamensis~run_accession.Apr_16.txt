@@ -1,0 +1,1 @@
+SRR2981114	74544	WGS	SRS1196892	Macaca assamensis	ILLUMINA	Illumina HiSeq 2000	public

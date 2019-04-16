@@ -17,17 +17,18 @@ elif [[ $# -lt 1 ]]; then
 else
 ###assigning positional argument to variable "org" that can be used for further manipulation 
     org=$1
-    label=$(echo $org|awk '{print $1}')
+    genus=$(echo $org|awk '{print $1}')
+    species=$(echo $org|awk '{print $2}')
     cdate=$(date|awk '{OFS="_"}{print $2,$3}')
-    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $label.SRA_info_$cdate.txt
+    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~SRA_info_$cdate.txt
     esearch -db sra -query "$org [ORGN]"|
     efetch -format runinfo -mode xml |
     xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run size_MB LibraryStrategy Sample ScientificName Platform Model Consent |
-    awk -F "\t" '$3=="WGS"{print $0}' >> $label.SRA_info_$cdate.txt
+    awk -F "\t" '$3=="WGS"{print $0}' >> $genus$species~SRA_info_$cdate.txt
 fi
 
 
-awk '{print $org}' $label.SRA_info_$cdate.txt| tail -n +2 > $label.run_accession.$cdate.txt
+awk '{print $org}' $genus$species~SRA_info_$cdate.txt| tail -n +2 > $genus$species~run_accession.$cdate.txt
 
-Entries=$(tail -n +2 $label.SRA_info_$cdate.txt | wc -l)
-echo "$Entries entries found. Run IDs for sequence download is availabe as $label.run_accession.$cdate.txt. See $label.SRA_info_$cdate.txt for more information"
+Entries=$(tail -n +2 $genus$species~SRA_info_$cdate.txt | wc -l)
+echo "$Entries entries found. Run IDs for sequence download is availabe as $genus$species~run_accession.$cdate.txt. See $genus$species~SRA_info_$cdate.txt for more information"
