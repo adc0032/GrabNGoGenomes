@@ -14,8 +14,7 @@ elif [[ $# -lt 2 ]]; then
 
 else
     ##Modules and Variables
-    module load sratooklkit.2.9.6-centos_linux64
-    #for redundant runs making variable for date to include on directory for sequence output
+    module load sra/2.8.1    
     cdate= $(date | awk'{OFS="_"}{print $2,$3}')
 
     mkdir seq_files_$cdate
