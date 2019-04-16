@@ -3,7 +3,9 @@
 if [[ $1 == "-h" ]]; then
 
     echo "Enter search query organism for lists of sequence run accession information."
-    echo "Script file with a tab delimited table including SRA, /# of bases, Library Type, Sample, and Scientific Name"
+    echo "Script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer informoation, and consent information for the organism"
+    echo "Script will also create a file with a list of run IDs for WGS data from queried organism; use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, seq_pull.sh "
+
 
 
 elif [[ $# -lt 1 ]]; then
