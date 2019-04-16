@@ -1,16 +1,18 @@
 #!/bin/bash
 
+
+##Modules and Variables
+
 module load sratooklkit.2.9.6-centos_linux64
+#for redundant runs making variable for date to include on directory for sequence output
+cdate= $(date | awk'{OFS="_"}{print $2,$3}')
 
-$DATE= date | awk'{OFS="_"}{print $2,$3}'
+mkdir seq_files_$cdate
 
-mkdir seq_files_$DATE
+cd seq_files_$cdate
 
-cd seq_files
+for run in $(cat run_list.txt)
+do
+    fastq-dump -I $run
+done
 
-awk $1 file.txt > Run_list.txt
-
-for: Run in $(cat Run_list.txt)
-    do
-    fastq-dump -I $Run
-    Done
