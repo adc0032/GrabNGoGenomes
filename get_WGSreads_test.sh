@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $1 == "-h" || $1 == '' ]]; then
+if [[ $1 == "-h" || $1 == "" ]]; then
 ####Telling user that if using scientific name, USER_ORGANISM must be in quotes
     echo "Usage: get_WGSread.sh USER_ORGANISM or \"USR_Genus USR_species\""
     echo "Enter search query organism for lists of sequence run accession information; If entering name with more than one word, use quotes"
