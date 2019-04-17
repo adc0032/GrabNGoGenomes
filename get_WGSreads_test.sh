@@ -1,13 +1,13 @@
 #!/bin/bash
 
-if [[ $1 == "-h" ]]; then
+if [[ $1 == "-h" || $1 == '' ]]; then
 ####Telling user that if using scientific name, USER_ORGANISM must be in quotes
     echo "Usage: get_WGSread.sh USER_ORGANISM or \"USR_Genus USR_species\""
     echo "Enter search query organism for lists of sequence run accession information; If entering name with more than one word, use quotes"
     echo "Example: get_WGSread.sh dog | get_WGSread.sh \"Canis lupis familaris\""
     echo "Script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer informoation, and consent information for the organism"
     echo "Script will also create a file with a list of run IDs for WGS data from queried organism; use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, seq_pull.sh "
-
+    exit 1
 
 
 elif [[ $# -lt 1 ]]; then
