@@ -6,7 +6,7 @@ if [[ $1 == "-h" || $1 == "" ]]; then
     echo "Examples: get_SeqReads -P dog | get_SeqReads -F \"Canis lupis familaris\" RAD-Seq"
     echo "In partial mode (-P), script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer informoation, and consent information for the organism;"
     echo "use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, seq_pull.sh"
-    echo "When running get_SeqReads in full mode (-F) library strategy must be included after search organism.
+    echo "When running get_SeqReads in full mode (-F) library strategy must be included after search organism."
     echo "Full mode creates a file with a list of run IDs from queried organism and downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module."
     exit 0
 
@@ -93,8 +93,8 @@ elif [[ $1 == "-F" ]]; then
 fi
 
 
-
-if [[ ! -s $genus$species~run_accession_$cdate.txt ]]; then
+runs="$genus$species~run_accession_$cdate.txt"
+if [[ ! -s $runs ]]; then
     echo "File is empty. Please provide SRR list; try seq_pull.sh -h for more information"
     exit 0
 else
@@ -115,9 +115,9 @@ else
     echo "====================================================="
 
     add=0
-    for run in $(cat $genus$species~run_accession_$cdate.txt ); do
+    for run in $(cat $runs ); do
             let add++
-            tot=$(cat $genus$species~run_accession_$cdate.txt|wc -l)
+            tot=$(cat $runs|wc -l)
             fastq-dump -v --split-files -I --gzip -O $sd $run
 
             echo "$add of $tot sequences downloaded to $sd"
