@@ -13,42 +13,42 @@ if [[ $1 == "-h" || $1 == "" ]]; then
 
 elif [[ $# -lt 3 ]]; then
 
-        echo "Please indicate -F or -P for full or partial run, followed by a search organism, followed by a library strategy for a table of NCBI's sequence information. Try -h for help"
-        exit 0
+    echo "Please indicate -F or -P for full or partial run, followed by a search organism, followed by a library strategy for a table of NCBI's sequence information. Try -h for help"
+    exit 0
 
 elif [[ $1 == "-P" ]]; then
-        org=$2
-        genus=$(echo $org|awk '{print $1}')
-        species=$(echo $org|awk '{print $2}')
-        cdate=$(date|awk '{OFS="_"}{print $2,$3}')
-        mkdir $genus$species~$cdate
-        cd $genus$species~$cdate
-        echo "Moving into $genus$species~$cdate/ ..."
-        echo ""
-        echo ""
-        echo "========================================================================================================================="
-        echo "Running SomeCreativelyNamedProgram in partial mode. All SRA search results for $org with public consent and SRR prefix will output to $genus$species~full_SRA_info_$cdate.txt"
-        echo "Use awk/grep to filter output and run seq_pull.sh USR_ORGN. Prompt will ask for SRA_info file to pull SRR IDs, default is last created SRA_info file for indicated USR_ORGN."
-        echo ""
-        echo ""
-        echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~full_SRA_info_$cdate.txt
-        esearch -db sra -query "$org [ORGN]"|
-        efetch -format runinfo -mode xml |
-        xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run size_MB LibraryStrategy Sample ScientificName Platform Model Consent|
-        awk -F "\t" '$8 == "public" {print $0}' | awk -F "\t" '/^SRR/ {print $0}'>> $genus$species~full_SRA_info_$cdate.txt
-        Entries=$(tail -n +2 $genus$species~full_SRA_info_$cdate.txt | wc -l)
-        echo "$Entries entries found. See $genus$species~full_SRA_info_$cdate.txt for more information."
-        echo ""
-        echo "To decrease downloading time, filtered output file for sequencing strategy indicated will be written to $genus$species~filtered_SRA_info_$cdate.txt. Use this file to create a list of SRR IDs as input for seq_pull.sh"
-        echo "See line 87 of this script for command structure to produce input list for seq_pull.sh"
-        strat=$3
-        echo ""
-        echo "Strategy used: $strat"
-        awk '$3 == "'$strat'" {print $0}' $genus$species~full_SRA_info_$cdate.txt >> $genus$species~filtered_SRA_info_$cdate.txt
-        Entries=$(tail -n +2 $genus$species~filtered_SRA_info_$cdate.txt | wc -l)
-        echo "$Entries entries retain after filtering for $strat reads. See $genus$species~filtered_SRA_info_$cdate.txt for more information."
-        echo ""
-        exit 0
+    org=$2
+    genus=$(echo $org|awk '{print $1}')
+    species=$(echo $org|awk '{print $2}')
+    cdate=$(date|awk '{OFS="_"}{print $2,$3}')
+    mkdir $genus$species~$cdate
+    cd $genus$species~$cdate
+    echo "Moving into $genus$species~$cdate/ ..."
+    echo ""
+    echo ""
+    echo "========================================================================================================================="
+    echo "Running SomeCreativelyNamedProgram in partial mode. All SRA search results for $org with public consent and SRR prefix will output to $genus$species~full_SRA_info_$cdate.txt"
+    echo "Use awk/grep to filter output and run seq_pull.sh USR_ORGN. Prompt will ask for SRA_info file to pull SRR IDs, default is last created SRA_info file for indicated USR_ORGN."
+    echo ""
+    echo ""
+    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~full_SRA_info_$cdate.txt
+    esearch -db sra -query "$org [ORGN]"|
+    efetch -format runinfo -mode xml |
+    xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run size_MB LibraryStrategy Sample ScientificName Platform Model Consent|
+    awk -F "\t" '$8 == "public" {print $0}' | awk -F "\t" '/^SRR/ {print $0}'>> $genus$species~full_SRA_info_$cdate.txt
+    Entries=$(tail -n +2 $genus$species~full_SRA_info_$cdate.txt | wc -l)
+    echo "$Entries entries found. See $genus$species~full_SRA_info_$cdate.txt for more information."
+    echo ""
+    echo "To decrease downloading time, filtered output file for sequencing strategy indicated will be written to $genus$species~filtered_SRA_info_$cdate.txt. Use this file to create a list of SRR IDs as input for seq_pull.sh"
+    echo "See line 87 of this script for command structure to produce input list for seq_pull.sh"
+    strat=$3
+    echo ""
+    echo "Strategy used: $strat"
+    awk '$3 == "'$strat'" {print $0}' $genus$species~full_SRA_info_$cdate.txt >> $genus$species~filtered_SRA_info_$cdate.txt
+    Entries=$(tail -n +2 $genus$species~filtered_SRA_info_$cdate.txt | wc -l)
+    echo "$Entries entries retain after filtering for $strat reads. See $genus$species~filtered_SRA_info_$cdate.txt for more information."
+    echo ""
+    exit 0
 
 
 
@@ -98,6 +98,15 @@ if [[ ! -s $genus$species~run_accession_$cdate.txt ]]; then
     echo "File is empty. Please provide SRR list; try seq_pull.sh -h for more information"
     exit 0
 else
+    asc="sra/2.8.1"
+    pbs="sratoolkit/2.8.0"
+    if [ "${HOSTNAME:0:9}" == "dmcvlogin" ]; then
+        module load $asc
+        echo "Loaded SRA Toolkit: $asc "
+    elif [ -n "$PBS_JOBNAME" ]; then
+            module load $pbs
+        echo "Loaded SRA Toolkit: $pbs "
+    fi
     mkdir $genus$species~files_$cdate
     sd="./$genus$species~files_$cdate/"
     echo ""
