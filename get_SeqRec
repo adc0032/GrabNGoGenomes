@@ -1,13 +1,13 @@
 #!/bin/bash
 
 if [[ $1 == "-h" || $1 == "" ]]; then
-    echo "Usage: get_SeqReads [-F|-P] [USER_ORGANISM | \"USR_Genus USR_species\] [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
+    echo -e "\nUsage: get_SeqRec [-F|-P] [USER_ORGANISM | \"USR_Genus USR_species\"] [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
     echo "Enter search query organism for lists of sequence run archive information; If entering name with more than one word, use quotes"
-    echo "Examples: get_SeqReads -P dog | get_SeqReads -F \"Canis lupis familaris\" RAD-Seq"
-    echo "In partial mode (-P), script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer informoation, and consent information for the organism;"
+    echo "Examples: get_SeqRec -P dog | get_SeqReads -F \"Canis lupis familaris\" RAD-Seq"
+    echo "In partial mode (-P), script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer information, and consent information for the organism;"
     echo "use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, seq_pull.sh"
     echo "When running get_SeqReads in full mode (-F) library strategy must be included after search organism."
-    echo "Full mode creates a file with a list of run IDs from queried organism and downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module."
+    echo "Full mode creates the same files as partial mode as well as a file with a list of run IDs from queried organism and downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module."
     exit 0
 
 
@@ -27,7 +27,7 @@ elif [[ $1 == "-P" ]]; then
     echo ""
     echo ""
     echo "========================================================================================================================="
-    echo "Running SomeCreativelyNamedProgram in partial mode. All SRA search results for $org with public consent and SRR prefix will output to $genus$species~full_SRA_info_$cdate.txt"
+    echo "Running Grab N' Go Genomes in partial mode. All SRA search results for $org with public consent and SRR prefix will output to $genus$species~full_SRA_info_$cdate.txt"
     echo "Use awk/grep to filter output and run seq_pull.sh USR_ORGN. Prompt will ask for SRA_info file to pull SRR IDs, default is last created SRA_info file for indicated USR_ORGN."
     echo ""
     echo ""
@@ -64,7 +64,7 @@ elif [[ $1 == "-F" ]]; then
     echo ""
     echo ""
     echo "========================================================================================================================="
-    echo "Running SomeCreativelyNamedProgram in full mode. SRA search results in $genus$species~full_SRA_info_$cdate.txt will be filtered by indicated library strategy input at command line or prompt"
+    echo "Running Grab N' Go Genomes in full mode. SRA search results in $genus$species~full_SRA_info_$cdate.txt will be filtered by indicated library strategy input at command line or prompt"
     echo "Filtered SRA info will be printed to $genus$species~filtered_SRA_info_$cdate.txt and used to create a list of SRR IDs $genus$species~run_accession_$cdate.txt"
     echo "for downloading sequences to the directory $genus$species~files_$cdate/"
     echo ""
