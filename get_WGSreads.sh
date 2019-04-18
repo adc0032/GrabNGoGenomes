@@ -11,10 +11,11 @@ if [[ $1 == "-h" || $1 == "" ]]; then
     exit 0
 
 
-elif [[ $# -lt 1 ]]; then
+elif [[ $# -lt 3 ]]; then
 
-        echo "Please provide organism for a table of NCBI's sequence information. Try -h for help"
-        exit 0
+    echo "Please indicate -F or -P for full or partial run, followed by a search organism,$
+    exit 0
+
 else
     cdate=$(date|awk '{OFS="_"}{print $2,$3}')
     echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $1.SRA_info_$cdate.txt
