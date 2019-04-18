@@ -50,7 +50,48 @@ elif [[ $1 == "-P" ]]; then
         echo ""
         exit 0
 
+
+
+elif [[ $1 == "-F" ]]; then
+
+    org=$2
+    genus=$(echo $org|awk '{print $1}')
+    species=$(echo $org|awk '{print $2}')
+    cdate=$(date|awk '{OFS="_"}{print $2,$3}')
+    mkdir $genus$species~$cdate
+    cd $genus$species~$cdate
+    echo "Moving into $genus$species~$cdate/ ..."
+    echo ""
+    echo ""
+    echo "========================================================================================================================="
+    echo "Running SomeCreativelyNamedProgram in full mode. SRA search results in $genus$species~full_SRA_info_$cdate.txt will be filtered by indicated library strategy input at command line or prompt"
+    echo "Filtered SRA info will be printed to $genus$species~filtered_SRA_info_$cdate.txt and used to create a list of SRR IDs $genus$species~run_accession_$cdate.txt"
+    echo "for downloading sequences to the directory $genus$species~files_$cdate/"
+    echo ""
+    echo ""
+    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~full_SRA_info_$cdate.txt
+    esearch -db sra -query "$org [ORGN]"|
+    efetch -format runinfo -mode xml |
+    xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run size_MB LibraryStrategy Sample ScientificName Platform Model Consent |
+    awk -F "\t" '$8 == "public" {print $0}' | awk -F "\t" '/^SRR/ {print $0}' >> $genus$species~full_SRA_info_$cdate.txt
+    Entries=$(tail -n +2 $genus$species~full_SRA_info_$cdate.txt | wc -l)
+    echo "$Entries entries found. See $genus$species~full_SRA_info_$cdate.txt for more information."
+    echo ""
+    echo ""
+    strat=$3
+    echo ""
+    echo "Strategy used: $strat"
+    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~filtered_SRA_info_$cdate.txt
+    awk '$3 == "'$strat'" {print $0}' $genus$species~full_SRA_info_$cdate.txt >> $genus$species~filtered_SRA_info_$cdate.txt
+    Entries=$(tail -n +2 $genus$species~filtered_SRA_info_$cdate.txt | wc -l)
+    echo "$Entries entries retain after filtering for $strat reads. See $genus$species~filtered_SRA_info_$cdate.txt for more information."
+    echo ""
+    echo ""
+    echo "Creating SRR list from $genus$species~filtered_SRA_info_$cdate.txt ..."
+    echo ""
+    awk '{print $1}' $genus$species~filtered_SRA_info_$cdate.txt| tail -n +2 > $genus$species~run_accession_$cdate.txt
 fi
+
 
 
 awk '{print $1}' $1.SRA_info_$cdate.txt| tail -n +2 > $1.run_accession.$cdate.txt
