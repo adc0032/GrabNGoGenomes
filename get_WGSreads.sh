@@ -94,7 +94,29 @@ fi
 
 
 
-awk '{print $1}' $1.SRA_info_$cdate.txt| tail -n +2 > $1.run_accession.$cdate.txt
+if [[ ! -s $genus$species~run_accession_$cdate.txt ]]; then
+    echo "File is empty. Please provide SRR list; try seq_pull.sh -h for more information"
+    exit 0
+else
+    mkdir $genus$species~files_$cdate
+    sd="./$genus$species~files_$cdate/"
+    echo ""
+    echo "Created the following directory for sequencing reads: $sd"
+    echo " "
+    echo "====================================================="
 
-Entries=$(tail -n +2 $1.SRA_info_$cdate.txt | wc -l)
-echo "$Entries entries found. Run IDs for sequence download is availabe as $1.run_accession.$cdate.txt. See $1.SRA_info_$cdate.txt for more information"
+    add=0
+    for run in $(cat $genus$species~run_accession_$cdate.txt ); do
+            let add++
+            tot=$(cat $genus$species~run_accession_$cdate.txt|wc -l)
+            fastq-dump -v --split-files -I --gzip -O $sd $run
+
+            echo "$add of $tot sequences downloaded to $sd"
+            echo "----------------------------------------"
+    done
+
+    echo " "
+    echo "====================================================="
+    echo "Downloader Complete! Sequences can be found in $sd"
+
+fi
