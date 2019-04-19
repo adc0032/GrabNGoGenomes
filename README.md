@@ -8,6 +8,7 @@ _Grab-N-Go Genomes: Automating Sequence Data Retrieval_
 
 __To get started, visit the setup repo at [GnGG_setup](https://github.com/adc0032/GnGG_setup/blob/master/README.md)__
 
+### _Troubleshooting_
 The `xtract` command present in `get_SeqRec` script should be included in the edirect download. However, if you are receiving an error claiming you do not have xtract then try using the following commands to download xtract:
 
 ``` bash
