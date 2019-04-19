@@ -1,2 +1,0 @@
-Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        Apr_16
-SRR2981114	74544	WGS	SRS1196892	Macaca assamensis	ILLUMINA	Illumina HiSeq 2000	public
