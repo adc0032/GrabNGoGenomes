@@ -1,0 +1,5 @@
+Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        Apr_16
+SRR3496213	428	WGS	SRS1412880	Microcebus rufus	ILLUMINA	NextSeq 500	public
+SRR3496243	324	WGS	SRS1412880	Microcebus rufus	ILLUMINA	NextSeq 500	public
+SRR3496245	410	WGS	SRS1412881	Microcebus rufus	ILLUMINA	NextSeq 500	public
+SRR3496215	410	WGS	SRS1412881	Microcebus rufus	ILLUMINA	NextSeq 500	public
