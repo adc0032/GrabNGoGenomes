@@ -7,7 +7,7 @@ if [[ $1 == "-h" || $1 == "" ]]; then
     echo -e "\noption flags:"
     echo -e "  -h\tPrint this help message."
     echo -e "  -P\tPartial mode: The script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer information, and consent information for the organism; use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, seq_pull.sh. Alternately, see the full mode flag."
-    echo -e "  -F\tFull mode: This creates the same files as partial mode as well as a file with a list of run IDs from queried organism and it downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module. When running get_SeqReads in full mode library strategy must be included after search organism."
+    echo -e "  -F\tFull mode: The script will create the same files as partial mode as well as a file with a list of run IDs from queried organism and it downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module. When running get_SeqReads in full mode library strategy must be included after search organism."
     exit 0
 
 
