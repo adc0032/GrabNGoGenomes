@@ -1,13 +1,13 @@
 #!/bin/bash
 
 if [[ $1 == "-h" || $1 == "" ]]; then
-    echo -e "\nUsage: get_SeqRec [-F|-P] [USER_ORGANISM | \"USR_Genus USR_species\"] [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
-    echo "Enter search query organism for lists of sequence run archive information; If entering name with more than one word, use quotes"
-    echo "Examples: get_SeqRec -P dog | get_SeqReads -F \"Canis lupis familaris\" RAD-Seq"
-    echo "In partial mode (-P), script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer information, and consent information for the organism;"
-    echo "use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, seq_pull.sh"
-    echo "When running get_SeqReads in full mode (-F) library strategy must be included after search organism."
-    echo "Full mode creates the same files as partial mode as well as a file with a list of run IDs from queried organism and downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module."
+    echo -e "\nUsage: get_SeqRec [-F|-P] [USER_ORGANISM|\"USR_Genus USR_species\"] [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
+    echo -e "\nEnter search query organism for lists of sequence run archive information; If entering name with more than one word, use quotes"
+    echo -e "\nExamples: get_SeqRec -P dog | get_SeqReads -F \"Canis lupis familaris\" RAD-Seq"
+    echo -e "\noption flags:"
+    echo -e "  -h\tPrint this help message."
+    echo -e "  -P\tPartial mode: The script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer information, and consent information for the organism; use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, seq_pull.sh. Alternately, see the full mode flag."
+    echo -e "  -F\tFull mode: This creates the same files as partial mode as well as a file with a list of run IDs from queried organism and it downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module. When running get_SeqReads in full mode library strategy must be included after search organism."
     exit 0
 
 
