@@ -10,7 +10,8 @@ __To get started, visit the setup repo at [GnGG_setup](https://github.com/adc003
 
 After using the setup repo above you can use the get_SeqRec and pull_SeqRec scripts contained in this repo.
 
-###get_SeqRec and pull_SeqRec
+### get_SeqRec and pull_SeqRec
+
 `get_SeqRec` will download SRA run info when given an input of an organism name (this can be genus or species scientific name as well as a common name). `get_SeqRec` has two options;
 partial and full. The partial option will obtain SRA run info for all nucleotide sequences of a given organism (but not the sequences themself) and print them out in two easy-to-read tab-delimited file (one with all reads and one that filters out non-public sequences). The full option will obtain the same info and it will create an accession file that it will use to obtain sequences. If you use the partial mode and not the full mode but later want to obtain sequences then you can filter out the SSR numbers from your filtered file and run that through pull_SeqRec, which will obtain your seqeunces in the same manner as get_SeqRec full mode. Further infomation about the scripts can be found using the -h flag while running the scripts.
 

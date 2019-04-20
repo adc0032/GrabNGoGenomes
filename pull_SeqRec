@@ -3,15 +3,18 @@
 
 if [[ $1 == "-h" ]]; then
 
-    echo "Usage: seq_pull.sh [USER_ORGANISM] (name used in previous script)"
-    echo "Provide organism name used in get_WGSreads.sh"
-    echo "Provide file to input a file file with sequence run accessions for downloading associated sequences to a directory."
+    echo -e "\nUsage: pull_SeqRec [USER_ORGANISM] [USER_ORGANISM_ACCESSION_FILE]"
+    echo -e "\nMake sure organism name is the same as the one used in get_WGSreads.sh to obtain the accession file. Also make sure organism name is in quotes if using more than one word (as in a species name)."
+    echo "Provide run accession after organism name. A new directory will be created based on the name of this file to contain downloaded sequences."
     echo "If a file is not provided, the script will error out."
-    echo "Run get_SeqReads -F USER_ORGANISM RNA-seq to get SRR list to input into seq_pull.sh. This script requires SRA Toolkit, please load local/cluster module."
+    echo "Run get_SeqRec -F USER_ORGANISM RNA-seq to get SRR list to input into pull_SeqRec. This script requires SRA Toolkit, please load local/cluster module."
+    echo -e "\nExamples: pull_SeqRec \"Macaca mulatta\" Macacamulatta~run_accession_Apr_19.txt | pull_SeqRec mouse mouse~run_accession_April_20.txt" 
+    echo -e "\nOption flag:"
+    echo -e "  -h\t Print this help message"
 
 elif [[ $# -lt 2 ]]; then
 
-    echo "Please provide an organism followed by a list of SRR IDs. run get_SeqReads -F USR_ORGN RNA-seq for example input file. Try -h for help"
+    echo "Please provide an organism followed by a list of SRR IDs. run get_SeqRec -F USR_ORGN RNA-seq for example input file. Try -h for help"
     exit 0
 
 else
@@ -31,7 +34,7 @@ else
     pbs="sratoolkit/2.8.0"
 
     if [[ ! -s $runs ]]; then
-        echo "File is empty. Please provide SRR list; try seq_pull.sh -h for more information"
+        echo "File is empty. Please provide SRR list; try pull_SeqRec -h for more information"
         exit 0
     else
 
@@ -70,7 +73,7 @@ else
 
         echo " "
         echo "====================================================="
-        echo "Downloader Complete! Sequences can be found in $sd"
+        echo "Download Complete! Sequences can be found in $sd"
 
     fi
 fi
