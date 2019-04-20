@@ -24,7 +24,7 @@ _GrabNGoGenomes_ is a wrapper for two NCBI toolkits, _E-utilities_ and _SRA Tool
 ### _Getting Sequence Information_
 #### Usage and Arguments
 
-Scripts require **three** arguments at the command line. 
+Scripts require **three** arguments. 
 
 ```bash
 get_SeqRec [-F|-P] ["QUERY_ORGANISM"|"Q_Genus Q_species"] [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]
