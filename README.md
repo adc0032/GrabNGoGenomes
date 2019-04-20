@@ -1,5 +1,6 @@
 # Grab-N-Go Genomes (GrabNGoGenomes): Automating Sequence Data Retrieval
-## Purpose: Wrapper used to search NCBI's SRA database through Entrez's E-utilities (v) for sequence data and download sequencing data using NCBI's SRA Toolkit (v) 
+
+## Purpose: Wrapper used to search NCBI's SRA database through Entrez's E-utilities (v 10.9) for sequence data and download sequencing data using NCBI's SRA Toolkit (v 2.9.6) 
 
 ### _Introduction_
 _Grab-N-Go Genomes: Automating Sequence Data Retrieval_ 
@@ -22,9 +23,6 @@ _GrabNGoGenomes_ is a wrapper for two NCBI toolkits, _E-utilities_ and _SRA Tool
 
 
 ### _Getting Sequence Information_
-
-`get_SeqRec` will download SRA run info when given an input of an organism name (this can be genus or species scientific name as well as a common name). Query organisms should be formatted with quotes (ex: `"Microcebus"`, `"Microcebus rufus"`, `"dog"`). More specifics regarding the usage and options of get_SeqRec are detailed below.
-
 #### Usage and Arguments
 
 Scripts require **three** arguments. 
@@ -53,20 +51,19 @@ _GrabNGoGenomes_ can be run in two modes, partial and full. The partial option w
 [user@hostname](~)[22:55]: get_SeqRec -P "Microcebus rufus" WGS
 ```
 
-```bash
-[user@hostname](~)[22:55]:get_SeqRec -F "Microcebus rufus" WGS
-```
-
 Output example:
 
 ```bash
 [user@hostname](Microcebusrufus~Apr_20)[22:55]: cat ~GrabNGoGenomes/Microcebusrufus~Apr_20/Microcebusrufus~full_SRA_info_Apr_20.txt
+
 Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        Apr_20
 SRR3496213	428	WGS	SRS1412880	Microcebus rufus	ILLUMINA	NextSeq 500	public
 SRR3496243	324	WGS	SRS1412880	Microcebus rufus	ILLUMINA	NextSeq 500	public
 ```
 
-**Partial mode requires the use of the both `get_SeqRec` and `pull_SeqRec` scripts to obtain sequences.** Partial mode allows user to filter data with their own parameters. `pull_SeqRec` requires a list of SRR numbers. If user desires sequences, create a file with a list of SRR numbers (See Full Mode output for example) and provide list as an argument to `pull_SeqRec`, which will obtain your seqeunces in the same manner as get_SeqRec full mode.
+**Partial mode requires the use of the both `get_SeqRec` and `pull_SeqRec` scripts to obtain sequences.** 
+
+Partial mode allows user to filter data with their own parameters. `pull_SeqRec` requires a list of SRR numbers. If user desires sequences, create a file with a list of SRR numbers (See Full Mode output for example) and provide list as an argument to `pull_SeqRec`, which will obtain your seqeunces in the same manner as get_SeqRec full mode.
 
 #############
 ```bash
@@ -81,6 +78,18 @@ SRR3496245
 SRR3496215
 
 ```
+
+####  `get_SeqRec`
+
+
+
+```bash
+[user@hostname](~)[22:55]:get_SeqRec -F "Microcebus rufus" WGS
+```
+
+`get_SeqRec` will download SRA run info when given an input of an organism name (this can be genus or species scientific name as well as a common name). Query organisms should be formatted with quotes (ex: `"Microcebus"`, `"Microcebus rufus"`, `"dog"`)
+
+`get_SeqRec` has two options;partial and full. The partial option will obtain SRA run info for all nucleotide sequences of a given organism (but not the sequences themself) and print them out in two easy-to-read tab-delimited file (one with all reads and one that filters out non-public sequences). The full option will obtain the same info and it will create an accession file that it will use to obtain sequences. If you use the partial mode and not the full mode but later want to obtain sequences then you can filter out the SSR numbers from your filtered file and run that through pull_SeqRec, which will obtain your seqeunces in the same manner as get_SeqRec full mode. Further infomation about the scripts can be found using the -h flag while running the scripts.
 
 ### _Troubleshooting_
 The `xtract` command present in `get_SeqRec` script should be included in the edirect download. However, if you are receiving an error claiming you do not have xtract then try using the following commands to download xtract:
