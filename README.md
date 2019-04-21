@@ -105,6 +105,10 @@ CATGCAGGAAACTACCTTAACCCAAAGCAACAAGGTTCAAATAAAAATTAGTTCATTAAATAAAAAGTTGAATGAAGGAG
 *Note: sequencing results were not paired end, hence the lack of SRR#\_2.fastq.gz files.*
 
 ##### Partial Mode
+
+```bash
+[user@hostname](~)[22:55]: get_SeqRec -P "Microcebus rufus" WGS
+```
 The partial option will obtain SRA run info just as described in full mode, but not the sequences themselves.
 
 *Partial mode requires the use of the both `get_SeqRec` and `pull_SeqRec` scripts to obtain sequences.* 
