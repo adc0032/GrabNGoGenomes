@@ -10,7 +10,6 @@ if [[ $1 == "-h" || $1 == "" ]]; then
     echo -e "  -F\tFull mode: The script will create the same files as partial mode as well as a file with a list of run IDs from queried organism and it downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module. When running get_SeqReads in full mode library strategy must be included after search organism."
     exit 0
 
-
 elif [[ $# -lt 3 ]]; then
 
     echo "Please indicate -F or -P for full or partial run, followed by a search organism, followed by a library strategy for a table of NCBI's sequence information. Try -h for help"
