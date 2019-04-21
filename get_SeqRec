@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#Creating first argument, User should type "-h" for help, which will show all echo messages. User can type any character or string. 
 if [[ $1 == "-h" || $1 == "" ]]; then
     echo -e "\nUsage: get_SeqRec [-F|-P] [USER_ORGANISM|\"USR_Genus USR_species\"] [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
     echo -e "\nEnter search query organism for lists of sequence run archive information; If entering name with more than one word, use quotes"
