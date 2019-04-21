@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [[ $1 == "-h" ]]; then
+if [[ $1 == "-h" || $1 == "" || $1 == "-H"]]; then
 
     echo -e "\nUsage: pull_SeqRec [USER_ORGANISM] [USER_ORGANISM_ACCESSION_FILE]"
     echo -e "\nMake sure organism name is the same as the one used in get_WGSreads.sh to obtain the accession file. Also make sure organism name is in quotes if using more than one word (as in a species name)."
@@ -23,10 +23,8 @@ else
     genus=$(echo $org|awk '{print $1}')
     species=$(echo $org|awk '{print $2}')
     cdate=$(date|awk '{OFS="_"}{print $2,$3}')
-
-##only useful at command line 
-#    read -e -p "Enter run accession list filename (run 'get_SeqReads -F' for example output file): " runs
-    echo " "
+    echo ""
+    echo "" 
     echo "File used: $2"
     runs=$2
 
