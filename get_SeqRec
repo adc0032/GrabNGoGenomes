@@ -1,13 +1,15 @@
 #!/bin/bash
 #Creating first argument, User should type "-h" for help, which will show all echo messages. User can type any character or string. 
-if [[ $1 == "-h" || $1 == "" ]]; then
-    echo -e "\nUsage: get_SeqRec [-F|-P] [USER_ORGANISM|\"USR_Genus USR_species\"] [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
-    echo -e "\nEnter search query organism for lists of sequence run archive information; If entering name with more than one word, use quotes"
-    echo -e "\nExamples: get_SeqRec -P dog | get_SeqRec -F \"Canis lupis familaris\" RAD-Seq"
+if [[ $1 == "-h" || $1 == "" || $1 == "-H"]]; then
+    echo -e "\nUsage: get_SeqRec [-F|-P] [QUERY_ORGANISM|\"Q_Genus Q_species\"] [SEQ_METHOD]"
+    echo -e "\nExamples: get_SeqRec -P \"dog\" WGS | get_SeqRec -F \"Canis lupis familaris\" RAD-Seq"
     echo -e "\noption flags:"
-    echo -e "  -h\tPrint this help message."
-    echo -e "  -P\tPartial mode: The script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer information, and consent information for the organism; use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, seq_pull.sh. Alternately, see the full mode flag."
-    echo -e "  -F\tFull mode: The script will create the same files as partial mode as well as a file with a list of run IDs from queried organism and it downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module. When running get_SeqReads in full mode library strategy must be included after search organism."
+    echo -e "  -h|-H\tPrints this help message. This message will also print when get_SeqRec is called with no arguments"
+    echo -e "  -P\tPartial mode: The script will provide a tab delimited table including SRR & SRS, library information, Scientific Name, sequencer information, and consent information for the organism; use awk/grep on provided SRA_info file to create filtered lists to provide to sequence downloader, pull_SeqRec. Alternately, see the full mode flag. Field is case-sensitive"
+    echo -e "  -F\tFull mode: The script will create the same files as partial mode as well as a file with a list of run IDs from queried organism and it downloads specified sequence reads; This script requires SRA Toolkit, please load local/cluster module. When running get_SeqReads in full mode library strategy must be included after search organism. Field is case-sensitive."
+    echo -e "\narguments:"
+    echo -e "  [QUERY_ORGANISM]\t:Enter search query organism for lists of sequence run archive information; Use quotes around query input"
+    echo -e "  [SEQ_METHOD]\t: Enter a single sequencing method to filter results. Field is case-sensitive: [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
     exit 0
 
 
@@ -23,12 +25,13 @@ elif [[ $1 == "-P" ]]; then
     cdate=$(date|awk '{OFS="_"}{print $2,$3}')
     mkdir $genus$species~$cdate
     cd $genus$species~$cdate
+    echo ""
     echo "Moving into $genus$species~$cdate/ ..."
     echo ""
     echo ""
     echo "========================================================================================================================="
     echo "Running Grab-N-Go Genomes in partial mode. All SRA search results for $org with public consent and SRR prefix will output to $genus$species~full_SRA_info_$cdate.txt"
-    echo "Use awk/grep to filter output and run pull_SeqRec USR_ORGN. Prompt will ask for SRA_info file to pull SRR IDs, default is last created SRA_info file for indicated USR_ORGN."
+    echo "Use awk/grep to filter output and run pull_SeqRec Q_ORGN."
     echo ""
     echo ""
     echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~full_SRA_info_$cdate.txt
@@ -44,6 +47,7 @@ elif [[ $1 == "-P" ]]; then
     strat=$3
     echo ""
     echo "Strategy used: $strat"
+    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~filtered_SRA_info_$cdate.txt
     awk '$3 == "'$strat'" {print $0}' $genus$species~full_SRA_info_$cdate.txt >> $genus$species~filtered_SRA_info_$cdate.txt
     Entries=$(tail -n +2 $genus$species~filtered_SRA_info_$cdate.txt | wc -l)
     echo "$Entries entries retain after filtering for $strat reads. See $genus$species~filtered_SRA_info_$cdate.txt for more information."
