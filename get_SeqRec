@@ -42,7 +42,7 @@ elif [[ $1 == "-P" ]]; then
     Entries=$(tail -n +2 $genus$species~full_SRA_info_$cdate.txt | wc -l)
     echo "$Entries entries found. See $genus$species~full_SRA_info_$cdate.txt for more information."
     echo ""
-    echo "To decrease downloading time, filtered output file for sequencing strategy indicated will be written to $genus$species~filtered_SRA_info_$cdate.txt. Use this file to create a list of SRR IDs as input for seq_pull.sh"
+    echo "To decrease downloading time, filtered output file for sequencing strategy indicated will be written to $genus$species~filtered_SRA_info_$cdate.txt. Use this file to create a list of SRR IDs as input for pull_seqRec.sh"
     echo "See line 87 of this script for command structure to produce input list for pull_SeqRec"
     strat=$3
     echo ""
