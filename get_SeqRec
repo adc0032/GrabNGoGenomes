@@ -64,12 +64,13 @@ elif [[ $1 == "-F" ]]; then
     cdate=$(date|awk '{OFS="_"}{print $2,$3}')
     mkdir $genus$species~$cdate
     cd $genus$species~$cdate
+    echo ""
     echo "Moving into $genus$species~$cdate/ ..."
     echo ""
     echo ""
     echo "========================================================================================================================="
-    echo "Running Grab-N-Go Genomes in full mode. SRA search results in $genus$species~full_SRA_info_$cdate.txt will be filtered by indicated library strategy input at command line or prompt"
-    echo "Filtered SRA info will be printed to $genus$species~filtered_SRA_info_$cdate.txt and used to create a list of SRR IDs $genus$species~run_accession_$cdate.txt"
+    echo "Running Grab-N-Go Genomes in full mode. SRA search results in $genus$species~full_SRA_info_$cdate.txt will be filtered by user-specified sequencing method."
+    echo "Filtered SRA info will be printed to $genus$species~filtered_SRA_info_$cdate.txt and used to create a list of SRR IDs, $genus$species~run_accession_$cdate.txt"
     echo "for downloading sequences to the directory $genus$species~files_$cdate/"
     echo ""
     echo ""
@@ -99,7 +100,7 @@ fi
 
 runs="$genus$species~run_accession_$cdate.txt"
 if [[ ! -s $runs ]]; then
-    echo "File is empty. Please provide SRR list; try seq_pull.sh -h for more information"
+    echo "File is empty. SRR list not created in previous step, or no sequences were found for your query to download. Please check intermediate files."
     exit 0
 else
     asc="sra/2.8.1"
