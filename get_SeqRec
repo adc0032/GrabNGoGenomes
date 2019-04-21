@@ -1,6 +1,6 @@
 #!/bin/bash
 #Creating first argument, User should type "-h" for help, which will show all echo messages. User can type any character or string. 
-if [[ $1 == "-h" || $1 == "" || $1 == "-H"]]; then
+if [[ $1 == "-h" || $1 == "" || $1 == "-H" ]]; then
     echo -e "\nUsage: get_SeqRec [-F|-P] [QUERY_ORGANISM|\"Q_Genus Q_species\"] [SEQ_METHOD]"
     echo -e "\nExamples: get_SeqRec -P \"dog\" WGS | get_SeqRec -F \"Canis lupis familaris\" RAD-Seq"
     echo -e "\noption flags:"
