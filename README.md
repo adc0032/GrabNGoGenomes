@@ -102,12 +102,12 @@ CATGCAGGAAACTACCTTAACCCAAAGCAACAAGGTTCAAATAAAAATTAGTTCATTAAATAAAAAGTTGAATGAAGGAG
 +SRR3496213.1.1 2_11101_18707_1025_1 length=146
 /A/EAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEAAEEEEEEEEEEEEEEEEE6EEEEEEEEEEEEE/EEEEEEEEEEE//AAEEEEAEEEEEAE/EAEEEEEEEE<AEEEEEEEE/6E6<EE/EEEAAE</E//<</
 ```
-**Note: sequencing results were not paired end, hence the lack of SRR#\_2.fastq.gz files.**
+*Note: sequencing results were not paired end, hence the lack of SRR#\_2.fastq.gz files.*
 
 ##### Partial Mode
 The partial option will obtain SRA run info just as described in full mode, but not the sequences themselves.
 
-**Partial mode requires the use of the both `get_SeqRec` and `pull_SeqRec` scripts to obtain sequences.** 
+*Partial mode requires the use of the both `get_SeqRec` and `pull_SeqRec` scripts to obtain sequences.* 
 
 This allows users to filter data with their own parameters. `pull_SeqRec` requires a list of SRR accessions. If user desires sequences, a file with SRR accession must be created (See Full Mode output for example) and provided to`pull_SeqRec` as an argument, which will obtain desired seqeunces.
 
