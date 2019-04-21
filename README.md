@@ -14,7 +14,7 @@ Usage explained through example:
 
 ### _Dependencies_
 
-_GrabNGoGenomes_ is a wrapper for two NCBI toolkits, _E-utilities_ and _SRA Toolkit_, used for searching and sharing data from biomedical and genomic databases of information. _E-utilities_ is set up during installation. Since these scripts are meant to be executed on an HPC, due to the large storage and computational resources required, please use your cluster's syntax for loading the _SRA Toolkit_ module. Add a `module load USER_VERSION_SRA-TOOLKIT` statement to your job header.
+_GrabNGoGenomes_ is a wrapper for two NCBI toolkits, _E-utilities  (Version number may vary)_ and _SRA Toolkit  (Version number may vary)_, used for searching and sharing data from biomedical and genomic databases of information. _E-utilities_ is set up during installation. Since these scripts are meant to be executed on an HPC, due to the large storage and computational resources required, please use your cluster's syntax for loading the _SRA Toolkit_ module. Add a `module load USER_VERSION_SRA-TOOLKIT` statement to your job header.
 
 ```bash
 [user@hostname](~)[22:55]: module load sratoolkit/2.8.0
