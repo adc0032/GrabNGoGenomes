@@ -1,6 +1,6 @@
 # Grab-N-Go Genomes (GrabNGoGenomes): Automating Sequence Data Retrieval
 
-## Purpose: Wrapper used to search NCBI's SRA database through Entrez's E-utilities (v 10.9) for sequence data and download sequencing data using NCBI's SRA Toolkit (v 2.9.6) 
+## Purpose: Wrapper used to search NCBI's SRA database through Entrez's E-utilities for sequence data and download sequencing data using NCBI's SRA Toolkit 
 
 ### _Introduction_
 _Grab-N-Go Genomes: Automating Sequence Data Retrieval_ 
