@@ -17,7 +17,7 @@ Usage explained through example:
 _GrabNGoGenomes_ is a wrapper for two NCBI toolkits, _E-utilities_ and _SRA Toolkit_, used for searching and sharing data from biomedical and genomic databases of information. _E-utilities_ is set up during installation. Since these scripts are meant to be executed on an HPC, due to the large storage and computational resources required, please use your cluster's syntax for loading the _SRA Toolkit_ module. Add a `module load USER_VERSION_SRA-TOOLKIT` statement to your job header.
 
 ```bash
-[user@hostname](~)[22:55]: module load sratoolkit/2.8.0
+[user@hostname](~)[22:55]: module load sra/2.8.1
 ```
 **Note:** Above is an example command, module name and version will vary. Please search user modules for more information.
 
@@ -105,6 +105,10 @@ CATGCAGGAAACTACCTTAACCCAAAGCAACAAGGTTCAAATAAAAATTAGTTCATTAAATAAAAAGTTGAATGAAGGAG
 *Note: sequencing results were not paired end, hence the lack of SRR#\_2.fastq.gz files.*
 
 ##### Partial Mode
+
+```bash
+[user@hostname](~)[22:55]: get_SeqRec -P "Microcebus rufus" WGS
+```
 The partial option will obtain SRA run info just as described in full mode, but not the sequences themselves.
 
 *Partial mode requires the use of the both `get_SeqRec` and `pull_SeqRec` scripts to obtain sequences.* 
