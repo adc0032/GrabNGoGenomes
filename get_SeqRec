@@ -35,24 +35,40 @@ elif [[ $1 == "-P" ]]; then
     echo "Use awk/grep to filter output and run pull_SeqRec Q_ORGN."
     echo ""
     echo ""
-    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~full_SRA_info_$cdate.txt
+    echo "Run_ID        Biosample_ID  Consent  Lib_Size(MB)  Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model        $cdate" > $genus$species~full_SRA_info_$cdate.txt
     esearch -db sra -query "$org [ORGN]"|
     efetch -format runinfo -mode xml |
-    xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run size_MB LibraryStrategy Sample ScientificName Platform Model Consent|
-    awk -F "\t" '$8 == "public" {print $0}' | awk -F "\t" '/^SRR/ {print $0}'>> $genus$species~full_SRA_info_$cdate.txt
+    xtract -pattern Row -tab "\t" -sep "," -def "BLANK" -element Run BioSample Consent size_MB LibraryStrategy Sample ScientificName Platform Model|
+    awk -F "\t" '$3 == "public" {print $0}' | awk -F "\t" '/^SRR/ {print $0}' >> $genus$species~full_SRA_info_$cdate.txt
     Entries=$(tail -n +2 $genus$species~full_SRA_info_$cdate.txt | wc -l)
     echo "$Entries entries found. See $genus$species~full_SRA_info_$cdate.txt for more information."
     echo ""
     echo "To decrease downloading time, filtered output file for sequencing strategy indicated will be written to $genus$species~filtered_SRA_info_$cdate.txt. Use this file to create a list of SRR IDs as input for pull_SeqRec.sh"
-    echo "See line 87 of this script for command structure to produce input list for pull_SeqRec"
+    echo "See line 87 of this script for command structure to produce input list for pull_SeqRec or check out the documentation at https://github.com/adc0032/GrabNGoGenomes"
     strat=$3
     echo ""
     echo "Strategy used: $strat"
-    echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent        $cdate" > $genus$species~filtered_SRA_info_$cdate.txt
-    awk '$3 == "'$strat'" {print $0}' $genus$species~full_SRA_info_$cdate.txt >> $genus$species~filtered_SRA_info_$cdate.txt
-    Entries=$(tail -n +2 $genus$species~filtered_SRA_info_$cdate.txt | wc -l)
-    echo "$Entries entries retain after filtering for $strat reads. See $genus$species~filtered_SRA_info_$cdate.txt for more information."
-    echo ""
+    if [[ $strat == "RNA-Seq" ]]; then
+        echo "Run_ID        Biosample_ID    Consent    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model        $cdate" > $genus$species~filtered_SRA_info_$cdate.txt
+        awk '$5 == "'$strat'" {print $0}' $genus$species~full_SRA_info_$cdate.txt >> $genus$species~filtered_SRA_info_$cdate.txt
+        Entries=$(tail -n +2 $genus$species~filtered_SRA_info_$cdate.txt | wc -l)
+        echo "$Entries entries retain after filtering for $strat reads. See $genus$species~filtered_SRA_info_$cdate.txt for more information."
+        samples=$(awk '{print $2}' $genus$species~filtered_SRA_info_$cdate.txt| tail -n +2)
+        echo "Metadata for $org. Biosample IDs are from $genus$species~filtered_SRA_info_$cdate.txt." > $genus$species~BiosampleMeta_$cdate.txt
+        for sample in $samples; do
+            esearch -db biosample -query "$sample"| 
+            efetch -format docsum|
+            xtract -pattern DocumentSummary -block Ids -element Id -block Attribute -element Attribute >> $genus$species~BiosampleMeta_$cdate.txt  
+        done
+        echo ""
+        echo "Metadata for $strat reads can be found in $genus$species~BiosampleMeta_$cdate.txt. Cross-reference biosample ids between files for filtering."
+    else
+        echo "Run_ID    Lib_Size(MB)    Lib_Type    Sample_ID    Scientific_Name    Sequencing_Platform    Model    Consent    Biosample_ID        $cdate" > $genus$species~filtered_SRA_info_$cdate.txt
+        awk '$5 == "'$strat'" {print $0}' $genus$species~full_SRA_info_$cdate.txt >> $genus$species~filtered_SRA_info_$cdate.txt
+        Entries=$(tail -n +2 $genus$species~filtered_SRA_info_$cdate.txt | wc -l)
+        echo "$Entries entries retain after filtering for $strat reads. See $genus$species~filtered_SRA_info_$cdate.txt for more information."
+        echo ""
+    fi
     exit 0
 
 
@@ -104,6 +120,21 @@ if [[ ! -s $runs ]]; then
     echo "File is empty. SRR list not created in previous step, or no sequences were found for your query to download. Please check intermediate files."
     exit 0
 else
+##Modules and Variables
+    myhost=$(echo $HOSTNAME| tr -d '0123456789')
+    if [ $myhost == "dmcvlogin" ]; then
+        module load sra/
+        echo "Loaded SRA Toolkit: $asc "
+    fi
+
+    if [ -n "$PBS_JOBNAME" ]; then
+        module load $pbs
+        echo "Loaded SRA Toolkit: $pbs "
+
+    fi
+    echo " "
+    echo " "
+
     mkdir $genus$species~files_$cdate
     sd="./$genus$species~files_$cdate/"
     echo ""
