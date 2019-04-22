@@ -11,7 +11,7 @@ if [[ $1 == "-h" || $1 == "" || $1 == "-H" ]]; then
     echo -e "  [QUERY_ORGANISM]\t:Enter search query organism for lists of sequence run archive information; Use quotes around query input"
     echo -e "  [SEQ_METHOD]\t: Enter a single sequencing method to filter results. Field is case-sensitive: [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
     exit 0
-
+#This module is created for taking user input. Based upon user's input this module will print the above lines in command line interface.
 
 elif [[ $# -lt 3 ]]; then
 
