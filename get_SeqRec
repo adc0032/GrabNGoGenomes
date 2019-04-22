@@ -11,13 +11,14 @@ if [[ $1 == "-h" || $1 == "" || $1 == "-H" ]]; then
     echo -e "  [QUERY_ORGANISM]\t:Enter search query organism for lists of sequence run archive information; Use quotes around query input"
     echo -e "  [SEQ_METHOD]\t: Enter a single sequencing method to filter results. Field is case-sensitive: [WGS|WXS|AMPLICON|RNA-Seq|RAD-Seq|ChIP-Seq|Hi-C]"
     exit 0
-
+#This module is created for taking user input. Based upon user's input this module will print the above lines in command line interface.
 
 elif [[ $# -lt 3 ]]; then
 
     echo "Please indicate -F or -P for full or partial run, followed by a search organism, followed by a library strategy for a table of NCBI's sequence information. Try -h for help"
     exit 0
-
+#This above module requires three arguments. "$#" is bash built in variable for total number of arguments. 
+#If total number of argument is less than three then the above error message will be printed.
 elif [[ $1 == "-P" ]]; then
     org=$2
     genus=$(echo $org|awk '{print $1}')

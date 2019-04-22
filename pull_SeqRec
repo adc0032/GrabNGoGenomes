@@ -3,11 +3,11 @@
 
 if [[ $1 == "-h" || $1 == "" || $1 == "-H" ]]; then
 
-    echo -e "\nUsage: pull_SeqRec [USER_ORGANISM] [USER_ORGANISM_ACCESSION_FILE]"
+    echo -e "\nUsage: pull_SeqRec [QUERY_ORG] [QUERY_ORG_ACCESSION_FILE]"
     echo -e "\nMake sure organism name is the same as the one used in get_SeqRec.sh to obtain the accession file. Also make sure organism name is in quotes if using more than one word (as in a species name)."
     echo "Provide run accession after organism name. A new directory will be created based on the name of this file to contain downloaded sequences."
     echo "If a file is not provided, the script will error out."
-    echo "Run get_SeqRec -F USER_ORGANISM RNA-seq to get SRR list to input into pull_SeqRec. This script requires SRA Toolkit, please load local/cluster module."
+    echo "Run get_SeqRec -F QUERY_ORG RNA-seq to get SRR list to input into pull_SeqRec. This script requires SRA Toolkit, please load local/cluster module."
     echo -e "\nExamples: pull_SeqRec \"Macaca mulatta\" Macacamulatta~run_accession_Apr_19.txt | pull_SeqRec mouse mouse~run_accession_April_20.txt" 
     echo -e "\nOption flag:"
     echo -e "  -h\t Print this help message"

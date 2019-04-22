@@ -3,13 +3,13 @@
 ## Purpose: Wrapper used to search NCBI's SRA database through Entrez's E-utilities (10.9) for sequence data and download sequencing data using NCBI's SRA Toolkit (2.9.6) 
 
 ### _Introduction_
-_Grab-N-Go Genomes: Automating Sequence Data Retrieval_ 
+_GrabNGoGenomes: Automating Sequence Data Retrieval_ 
 
 _GrabNGoGenomes_ was created with the "intro to biocomputing" student in mind. Often times, graduate students are new to bioinformatic skillsets and programs needed to perform their research. _GrabNGoGenomes_ can help students get started by disentangling the sequence search and download process into a more streamlined process. 
 
 __To get started, visit the setup repo at [GnGG_setup](https://github.com/adc0032/GnGG_setup/blob/master/README.md)__
 
-After using the setup repo above you can use the `get_SeqRec` and `pull_SeqRec` scripts contained in this repo. 
+After using the setup repository above you can use the `get_SeqRec` and `pull_SeqRec` scripts contained in this repository. 
 Usage explained through example:
 
 ### _Dependencies_
