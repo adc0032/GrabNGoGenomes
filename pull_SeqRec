@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [[ $1 == "-h" || $1 == "" || $1 == "-H"]]; then
+if [[ $1 == "-h" || $1 == "" || $1 == "-H" ]]; then
 
     echo -e "\nUsage: pull_SeqRec [USER_ORGANISM] [USER_ORGANISM_ACCESSION_FILE]"
     echo -e "\nMake sure organism name is the same as the one used in get_WGSreads.sh to obtain the accession file. Also make sure organism name is in quotes if using more than one word (as in a species name)."

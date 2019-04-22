@@ -103,15 +103,6 @@ if [[ ! -s $runs ]]; then
     echo "File is empty. SRR list not created in previous step, or no sequences were found for your query to download. Please check intermediate files."
     exit 0
 else
-    asc="sra/2.8.1"
-    pbs="sratoolkit/2.8.0"
-    if [ "${HOSTNAME:0:9}" == "dmcvlogin" ]; then
-        module load $asc
-        echo "Loaded SRA Toolkit: $asc "
-    elif [ -n "$PBS_JOBNAME" ]; then
-            module load $pbs
-        echo "Loaded SRA Toolkit: $pbs "
-    fi
     mkdir $genus$species~files_$cdate
     sd="./$genus$species~files_$cdate/"
     echo ""
