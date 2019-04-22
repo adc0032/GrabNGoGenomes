@@ -18,7 +18,7 @@ elif [[ $# -lt 3 ]]; then
     echo "Please indicate -F or -P for full or partial run, followed by a search organism, followed by a library strategy for a table of NCBI's sequence information. Try -h for help"
     exit 0
 #This above module requires three arguments. "$#" is bash built in variable for total number of arguments. 
-#If total number of argument is less than three then the following error message will be printed.
+#If total number of argument is less than three then the above error message will be printed.
 elif [[ $1 == "-P" ]]; then
     org=$2
     genus=$(echo $org|awk '{print $1}')
