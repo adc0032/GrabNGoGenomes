@@ -16,8 +16,8 @@ Usage explained through example:
 
 _GrabNGoGenomes_ is a wrapper for two NCBI toolkits, _E-utilities_ and _SRA Toolkit_, used for searching and sharing data from biomedical and genomic databases of information. _E-utilities_ is set up during installation. Since these scripts are meant to be executed on an HPC, due to the large storage and computational resources required, please use your cluster's syntax for loading the _SRA Toolkit_ module. Add a `module load USER_VERSION_SRA-TOOLKIT` statement to your job header.
 
-```bash
-[user@hostname](~)[22:55]: module load sra/2.8.1
+```
+module load sra/2.8.1
 ```
 **Note:** Above is an example command, module name and version will vary. Please search user modules for more information.
 
@@ -118,6 +118,19 @@ This allows users to filter data with their own parameters. `pull_SeqRec` requir
 ```bash
 awk '{print $1}' Microcebusrufus~filtered_SRA_info_Apr_20.txt| tail -n +2 > Microcebusrufus~run_accession_Apr_20.txt
 ```
+If `RNA-Seq`is provided as the sequencing method, an additional file with biosample metadata will be created for more filtering parameters
+
+```
+Metadata for Sceloporus undulatus. Biosample IDs are from Sceloporusundulatus~filtered_SRA_info_Apr_22.txt.
+SAMN06312743    Sund_embryo     SRS1964566      not applicable  2 days after egg laying early embryonic stage   pooled male and female  embryo
+SAMN06312742    Sund_muscle_M2  SRS1964607      not applicable  not collected   adult   female  skeletal muscle
+SAMN06312741    Sund_brain_B1   SRS1964608      not applicable  not collected   adult   female  brain
+SAMN01823435    Fence Lizard    SRS378966       Adult   liver
+SAMN08687241    SU_1755 SRS3035612      SU_1755 Adult   male    Liver   Tonia Schwartz  Tonia Schwartz Lab Members      July-2017       USA: Auburn University  Lee County, Alabama (Auburn University) 32.59 N 85.48 W
+SAMN08687240    SU_1752 SRS3035611      SU_1752 Adult   male    Liver   Tonia Schwartz  Tonia Schwartz Lab Members      July-2017       USA: Auburn University  Lee County, Alabama (Auburn, Greenhouse)        32.61 N 85.46 W
+SAMN08687239    SU_1751 SRS3035610      SU_1751 Adult   male    Liver   Tonia Schwartz  Tonia Schwartz Lab Members      July-2017       USA: Auburn University  Lee County, Alabama (Auburn, Greenhouse)        32.61 N 85.46 W
+```
+Biosample IDs correspond to the filtered run information file and parameters can be used to further filter datasets.
 
 This awk one-liner can be used on user-filtered files to create run accession lists appropriate for input into `pull_SeqRec`
 
